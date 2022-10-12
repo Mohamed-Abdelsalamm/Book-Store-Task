@@ -192,7 +192,7 @@ class _HomeState extends State<Home> {
                               height: 40,
                               width: double.infinity,
                               child: RaisedButton(
-                                color: Colors.blue,
+                                color: Colors.teal,
                                 onPressed: () {
                                   setState(() {
                                     BooksProvider.instance.insert(
