@@ -95,11 +95,44 @@ class _HomeState extends State<Home> {
                               ),
                               trailing: IconButton(
                                 onPressed: () async {
-                                  if (books.id != null) {
-                                    await BooksProvider.instance
-                                        .delete(books.id!);
-                                  }
-                                  setState(() {});
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                            'Delete book',
+                                          ),
+                                          content: Text(
+                                            'Are you sure you want to delete this book',
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text(
+                                                'Cancel',
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () async {
+                                                if (books.id != null) {
+                                                  await BooksProvider.instance
+                                                      .delete(books.id!);
+                                                }
+                                                setState(() {});
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text(
+                                                'Yes',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
                                 },
                                 icon: Icon(
                                   Icons.delete_forever,
